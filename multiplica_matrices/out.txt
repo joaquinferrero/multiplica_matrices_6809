@@ -1,0 +1,37 @@
+Reading symbols from 'multiplica_matrices.map'...
+
+=== Multiplicación de dos matrices 3x3 ===
+Introduzca los datos de las matrices por filas
+
+Matriz 1: 
+	Fila 1: 
+	Fila 2: 
+	Fila 3: 
+
+Matriz 2: 
+	Fila 1: 
+	Fila 2: 
+	Fila 3: 
+
+Resultado:
++             +
+|   1   2   3 |
+|   4   5   6 |
+|   7   8   9 |
++             +
+
+*
+
++             +
+|   9   6   3 |
+|   8   5   2 |
+|   7   4   1 |
++             +
+
+=
+
++             +
+|  46  28  10 |
+| 118  73  28 |
+| 190 118  46 |
++             +

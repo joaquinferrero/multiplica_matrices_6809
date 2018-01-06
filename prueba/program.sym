@@ -1,0 +1,38 @@
+ASxxxx Assembler V05.05  (Motorola 6809), page 1.
+Hexidecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                =   2710 L
+    .__.ABS.                                                =   0000 G
+    .__.CPU.                                                =   0000 L
+  0 .__.END.                                                =   0000 GR
+    .__.H$L.                                                =   0001 L
+    DIM                                                     =   0003 
+    EXIT_OS                                                 =   FF01 
+    STDIN                                                   =   FF02 
+    STDOUT                                                  =   FF00 
+    VecFIRQ                                                 =   FFF6 
+    VecIRQ                                                  =   FFF8 
+    VecNMI                                                  =   FFFC 
+    VecRESET                                                =   FFFE 
+    VecSWI                                                  =   FFFA 
+    VecSWI2                                                 =   FFF4 
+    VecSWI3                                                 =   FFF2 
+  0 mat1                                                        0028 R
+  0 mat2                                                        0031 R
+  0 msg_saluda                                                  0014 R
+  0 print                                                       003A GR
+  0 print_numero                                                003B GR
+  0 programa                                                    0000 GR
+
+ASxxxx Assembler V05.05  (Motorola 6809), page 2.
+Hexidecimal [16-Bits]
+
+Area Table
+
+[_CSEG]
+   0 _CODE                                 size   3C   flags CD80
+[_DSEG]
+   1 _DATA                                 size    0   flags C0C0
+

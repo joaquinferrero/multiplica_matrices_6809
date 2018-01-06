@@ -1,0 +1,76 @@
+;
+; Multiplicación de dos matrices 3x3
+;
+; Joaquín Ferrero. 18 mayo 2014.
+;
+; v2
+; 1915 ciclos para una matriz de 3x3
+;
+; versión para asm80.com
+;
+
+; inicialización
+	ldu	#m3		; puntero U apunta a matriz resultado
+	ldx	#m1		; apuntamos a base de las matrices
+        ldy	#m2
+
+; bucle por cada dato en la matriz resultado
+bucle1:
+        clr	acumula		; limpiamos acumulador
+        clr	acumula+1
+
+	lda	#3		; inicializamos contador
+	sta	c
+
+; bucle que suma los multiplicandos
+bucle0:
+	lda	,x		; leer dato de la fila en primera matriz
+        ldb	,y		; leer dato de la columna en segunda matriz
+
+        mul			; multiplicar
+        
+	addd	acumula		; y sumar
+	std	acumula		; al acumulador
+;
+	leax	1,x		; apuntamos a siguiente dato en fila
+        leay	3,y		; apuntamos a siguiente dato en columna
+;
+	dec	c		; repetimos
+        bne	bucle0
+;
+	stb	,u+		; guardar resultado        
+;
+	leax	-3,x		; reposicionamos puntero a fila
+	leay	-8,y		; reposicionamos puntero a siguiente columna
+;
+	dec	columna		; siguiente columna
+	bne	bucle1		; repetir para todas las columnas
+;
+	ldy	#m2		; reposicionamos puntero a columna
+        lda	#3		; inicializar contador de columnas
+        sta	columna
+;
+	leax	3,x		; reposicionamos puntero a siguiente fila
+;
+	dec	fila		; siguiente fila
+        bne	bucle1		; repetir para todas las filas
+;
+	bra	*      		; parar
+;
+m1	db	1,2,3		; primera matriz
+	db	4,5,6
+    	db	7,8,9
+;
+m2	db	9,6,3		; segunda matriz
+	db	8,5,2
+    	db	7,4,1
+;
+fila	db	3		; fila y columna en que trabajamos
+columna	db	3
+;
+m3	ds	9		; resultado 3x3 * 3x3 = 3x3
+;
+acumula	ds	2		; acumulador de suma de productos
+c	ds	1		; contador
+
+	.end

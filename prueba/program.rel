@@ -1,0 +1,29 @@
+XH2
+H 2 areas 5 global symbols 2 banks 1 modes
+M Programa
+G 00 00 80 81 82 83 84 85 86 87 88 89 8A 8B 8C 8D 8E 8F
+B _CSEG base 0 size 0 map 0 flags 0
+B _DSEG base 0 size 0 map 0 flags 4 fsfx _DS
+S .__.ABS. Def0000
+A _CODE size 3C flags CD80 bank 0
+S programa Def0000
+S .__.END. Def0000
+S print_numero Def003B
+S print Def003A
+A _DATA size 0 flags CCC0 bank 1
+T 00 00
+R 00 00 00 00
+T 00 00 8E 00 14 BD 00 3A CE
+R 00 00 00 00 01 03 00 00 01 06 00 00
+T 00 07 00 28 C6 01 CE 00 31 C6 02 1F 89 20 FE
+R 00 00 00 00 01 02 00 00 01 07 00 00
+T 00 14 0A 3D 3D 3D 20 4D 75 6C 74 69 70 6C 69
+R 00 00 00 00
+T 00 21 63 61 74 69 6F 6E 00
+R 00 00 00 00
+T 00 28
+R 00 00 00 00
+T 00 31
+R 00 00 00 00
+T 00 3A 39 39
+R 00 00 00 00

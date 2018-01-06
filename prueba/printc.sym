@@ -1,0 +1,22 @@
+ASxxxx Assembler V05.00  (Motorola 6809), page 1.
+Hexidecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                =   2710 L
+    .__.ABS.                                                =   0000 G
+    .__.CPU.                                                =   0000 L
+    .__.H$L.                                                =   0001 L
+  0 print_c                                                     0000 GR
+
+
+ASxxxx Assembler V05.00  (Motorola 6809), page 2.
+Hexidecimal [16-Bits]
+
+Area Table
+
+[_CSEG]
+   0 _CODE                                 size    6   flags CD80
+[_DSEG]
+   1 _DATA                                 size    0   flags C0C0
+
