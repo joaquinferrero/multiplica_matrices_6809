@@ -5,6 +5,7 @@
 ;
 ; v4. Versión para LWTools
 ; 
+; Última versión: 20180214T2215
 ;
 ; Propósito:
 ;	Se realiza la multiplicación de dos matrices.
@@ -33,7 +34,7 @@ DIM2F	equ	(m3-m2)/DIM2C
 	org	$0000
 	setdp	0		; cuando se inicia, la cpu tiene DP = 0
 
-; Programa: ejemplo de llamada a la susbrutina
+; Programa: ejemplo de llamada a la subrutina
 
 	LDX     #m1		; apuntamos a base de las matrices
 	LDY     #m2 
