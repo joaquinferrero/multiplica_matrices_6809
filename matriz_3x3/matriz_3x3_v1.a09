@@ -1,94 +1,95 @@
 ;
 ; Multiplicación de dos matrices 3x3
+; Joaquín Ferrero, 2014.
 ;
 ; v1
 ; 2342 ciclos, para matrices 3x3
 ;
 ; Variables:
-;	fila,columna	: número de fila y columna que estamos calculando
-;	m1,m2		: matrices de entrada, a multiplicar
-;	m3		: espacio reservado para el resultado de la multiplicación
-;	c		: variable contador
-;	acumula		: variable sumador
+;        fila,columna   : número de fila y columna que estamos calculando
+;        m1,m2          : matrices de entrada, a multiplicar
+;        m3             : espacio reservado para el resultado de la multiplicación
+;        c              : variable contador
+;        acumula        : variable sumador
 ;
 ; Proceso:
-;	Empezando por la primera fila y columna, recorremos los elementos de las dos matrices.
-;	Por cada fila y columna debemos realizar la suma de tres multiplicaciones.
-;	La suma la vamos guardando en la variable "acumula". El contador "c" nos sirve para
-;	recorrer los tres pares de valores.
-;	Los punteros X e Y se utilizan para apuntar a los datos dentro de las dos matrices.
-;	Usamos el puntero U para ir guardando el resultado.
+;        Empezando por la primera fila y columna, recorremos los elementos de las dos matrices.
+;        Por cada fila y columna debemos realizar la suma de tres multiplicaciones.
+;        La suma la vamos guardando en la variable "acumula". El contador "c" nos sirve para
+;        recorrer los tres pares de valores.
+;        Los punteros X e Y se utilizan para apuntar a los datos dentro de las dos matrices.
+;        Usamos el puntero U para ir guardando el resultado.
 ;
 
 ; inicializa variables y registros
-	ldu	#m3		; puntero U apunta a matriz resultado
-	clr	fila
-	clr	columna
+        ldu     #m3                     ; puntero U apunta a matriz resultado
+        clr     fila
+        clr     columna
 
 ; bucle por cada dato en la matriz resultado
 bucle1:
-	clra
+        clra
         clrb
-        sta	c		; inicializamos contador
-	std	acumula		; inicializamos acumulador
+        sta     c                       ; inicializamos contador
+        std     acumula                 ; inicializamos acumulador
 ;
-	ldx	#m1		; apuntamos a base de las matrices
-        ldy	#m2
+        ldx     #m1                     ; apuntamos a base de las matrices
+        ldy     #m2
 
 ; ajustamos punteros según la fila y columna
-	lda	fila		; fila actual
-        ldb	#3		; ancho de la matriz
-        mul			; D = A * B (solo nos interesa el byte bajo, B)
-        abx			; X = X + B (X apunta a la fila correcta de la primera matriz)
-        lda	columna		; columna actual
-        leay	a,y		; Y apunta a la columna correcta dentro de la segunda matriz
+        lda     fila                    ; fila actual
+        ldb     #3                      ; ancho de la matriz
+        mul                             ; D = A * B (solo nos interesa el byte bajo, B)
+        abx                             ; X = X + B (X apunta a la fila correcta de la primera matriz)
+        lda     columna                 ; columna actual
+        leay    a,y                     ; Y apunta a la columna correcta dentro de la segunda matriz
 
 ; bucle que suma los multiplicandos de cada dato
 bucle0:
-	lda	,x		; leer dato de la fila en primera matriz
-        ldb	,y		; leer dato de la columna en segunda matriz
+        lda     ,x                      ; leer dato de la fila en primera matriz
+        ldb     ,y                      ; leer dato de la columna en segunda matriz
 
-        mul			; multiplicar
+        mul                             ; multiplicar
 
-	addd	acumula		; y sumar
-	std	acumula		; guardamos acumulador para el siguiente valor
+        addd    acumula                 ; y sumar
+        std     acumula                 ; guardamos acumulador para el siguiente valor
 ;
-	leax	1,x		; apuntamos a siguiente dato en fila
-        leay	3,y		; apuntamos a siguiente dato en columna
+        leax    1,x                     ; apuntamos a siguiente dato en fila
+        leay    3,y                     ; apuntamos a siguiente dato en columna
 ;
-        lda	#3		; dimensión de las matrices
-	inc	c		; siguiente elemento dentro de la fila o columna
-        cmpa	c		; ¿hemos completado la fila/columna?
-        bne	bucle0		; no, seguir sumando
+        lda     #3                      ; dimensión de las matrices
+        inc     c                       ; siguiente elemento dentro de la fila o columna
+        cmpa    c                       ; ¿hemos completado la fila/columna?
+        bne     bucle0                  ; no, seguir sumando
 ;
-	stb	,u+		; sí, guardar resultado        
+        stb     ,u+                     ; sí, guardar resultado
 ;
-	inc	columna		; siguiente columna
-	cmpa	columna		; ¿hemos llegado al final de las columnas?
-	bne	bucle1		; no, repetir para todas las columnas
+        inc     columna                 ; siguiente columna
+        cmpa    columna                 ; ¿hemos llegado al final de las columnas?
+        bne     bucle1                  ; no, repetir para todas las columnas
 ;
-        clr	columna		; sí, inicializar contador de columnas, y
-	inc	fila		; siguiente fila
-        cmpa	fila		; ¿hemos llegado al final de las filas?
-        bne	bucle1		; no, repetir para todas las filas
+        clr     columna                 ; sí, inicializar contador de columnas, y
+        inc     fila                    ; siguiente fila
+        cmpa    fila                    ; ¿hemos llegado al final de las filas?
+        bne     bucle1                  ; no, repetir para todas las filas
 ;
-	bra	*		; sí, parar. Hemos terminado
+        bra     *                       ; sí, parar. Hemos terminado
 
 ; Datos
-m1	.db	1,2,3		; primera matriz
-	.db	4,5,6
-    	.db	7,8,9
-    
-m2	.db	9,6,3		; segunda matriz
-	.db	8,5,2
-    	.db	7,4,1
+m1      .db     1,2,3                   ; primera matriz
+        .db     4,5,6
+        .db     7,8,9
 
-m3	.ds	9		; resultado [3]x(3) * (3)x[3] = [3]x[3]
+m2      .db     9,6,3                   ; segunda matriz
+        .db     8,5,2
+        .db     7,4,1
+
+m3      .ds     9                       ; resultado [3]x(3) * (3)x[3] = [3]x[3]
 
 ; Variables
-acumula	.ds	2		; acumulador de suma de productos
-c	.ds	1		; contador
-fila	.ds	1		; fila y columna en que estamos trabajamos
-columna	.ds	1
+acumula .ds     2                       ; acumulador de suma de productos
+c       .ds     1                       ; contador
+fila    .ds     1                       ; fila y columna en que estamos trabajamos
+columna .ds     1
 
-	end
+        end
